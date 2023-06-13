@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<div class="container" layout:fragment="comments">
+  <form th:action="@{'/trello/add_comment'}" method="post">
+    <div class="col-md-9">
+      <div class="form-group"th:each="comment:${comments}">
+        <h4 th:text="${comment.getComment()}"></h4>
+        <input type="hidden" th:value="${comment.getTask().getId()}" name="task_id">
+      </div>
+      <textarea class="form-control" placeholder="Insert comment" name="comment"></textarea>
+    </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+</html>

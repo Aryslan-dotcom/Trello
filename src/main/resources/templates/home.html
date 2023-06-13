@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div class="container" layout:fragment="home">
+    <div class="row">
+        <div class="col-12 mt-3 ">
+            <div class="container-fluid d-flex">
+                <form th:action="@{'/trello/add-folder'}" method="post">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-close-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Add Folder
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">ADD NEW FOLDER</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input class="form-control" type="text" placeholder="Folder Name" name="name">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Add folder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form th:action="@{'/trello/delete_folder'}" method="post">
+                    <button type="button" class="btn btn-close-white" data-bs-toggle="modal" data-bs-target="#deleteFolder">
+                        Delete Folder
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteFolder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel4" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel4">DELETE FOLDER</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <select class="form-control" name="delete_folder_id">
+                                        <option th:each="folder:${folders}" th:value="${folder.getId()}" th:text="${folder.getName()}"></option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="container-fluid form-control mt-3 p-3" th:each="folder:${folders}">
+                <h2 th:text="${folder.getName()}"></h2>
+                <a th:href="@{'/trello/details/'+${folder.getId()}}" class="btn btn-primary p-2" th:value="${folder.getId()}">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

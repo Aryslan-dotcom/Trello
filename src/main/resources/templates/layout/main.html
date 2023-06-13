@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container" th:insert="~{layout/navbar}"></div>
+<div class="container" layout:fragment="home">
+</div>
+<div class="container" layout:fragment="details">
+</div>
+<div class="container" layout:fragment="comments"></div>
+<div class="container" layout:fragment="addCategories"></div>
+<script type="text/javascript" src="/js/bootstrap.bundle.js" ></script>
+</body>
+</html>
